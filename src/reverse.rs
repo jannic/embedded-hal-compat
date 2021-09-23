@@ -273,3 +273,26 @@ mod serial {
         }
     }
 }
+
+
+// Timer
+mod timer {
+    use super::{Reverse};
+
+    impl <T> eh0_2::timer::CountDown for Reverse<T>
+    where
+        T: eh1_0::timer::nb::CountDown,
+    {
+        type Time = T::Time;
+
+        fn start<C>(&mut self, count: C)
+        where
+        C: Into<Self::Time> {
+            self.inner.start(count).unwrap();
+        }
+
+        fn wait(&mut self) -> eh1_0::nb::Result<(), void::Void> {
+            self.inner.wait().map_err( |o| o.map( |e| panic!("{:?}", e) ) )
+        }
+    }
+}

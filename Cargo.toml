@@ -10,6 +10,7 @@ license = "MIT"
 
 
 [dependencies]
+void = { version = "1.0.2", default-features = false }
 
 [dependencies.eh0_2]
 package = "embedded-hal"
